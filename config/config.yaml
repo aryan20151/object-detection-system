@@ -1,0 +1,50 @@
+model:
+  # YOLOv8 model configuration
+  object_detector:
+    model_path: "yolov8n.pt"
+    confidence_threshold: 0.25
+    iou_threshold: 0.45
+  
+  subobject_detector:
+    model_path: "yolov8n-seg.pt"
+    confidence_threshold: 0.3
+    iou_threshold: 0.4
+
+# Object-subobject relationships
+relationships:
+  person:
+    - helmet
+    - backpack
+    - shoes
+  car:
+    - tire
+    - license_plate
+    - door
+  bicycle:
+    - wheel
+    - seat
+    - handlebar
+
+# Processing settings
+processing:
+  input_size: [640, 640]
+  batch_size: 1
+  device: "cpu"
+  fps_target: 20
+
+# Output settings
+output:
+  save_detection_images: true
+  save_crops: true
+  json_indent: 2
+  visualization:
+    box_thickness: 2
+    text_size: 1
+    font_thickness: 1
+
+# Paths
+paths:
+  input_dir: "data/input"
+  output_dir: "data/output"
+  crops_dir: "data/output/crops"
+  results_dir: "data/output/results"
